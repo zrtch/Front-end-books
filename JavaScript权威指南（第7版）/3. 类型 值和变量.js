@@ -105,3 +105,82 @@ console.log(value); // good bye
 console.log(String.raw`\n`.length); //一个反斜杠字符和一个字母n: 2
 
 // 模式匹配
+// /[1-9][0-9]*/; //匹配非日数字，后面跟着任意数字
+let text = "testing: 1, 2, 3"
+let pattern = /\d+/g
+console.log(pattern.test(text)); //存在匹配项: true
+console.log(text.match(pattern)); //所有匹配项的数组: [ '1', '2', '3' ]
+
+// 布尔值：表示真或假、开或关、是或否。JavaScript的任何值都可以转换为布尔值。
+// 下面的这些值都会转换为（因而可以被用作）布尔值false：
+undefined, null, 0, -0, NaN, "" // 空字符串
+// 同理，所有其他值，包括所有对象（和数组）都转换为（可以被用作）布尔值true。
+// 布尔值只有一个toString()方法，可用于将自己转换为字符“true”或“false”
+// 布尔值操作符：
+// &&：当且仅当两个操作数都为真时，求值结果才是真；任何一个操作数为假，结果都为假。
+// ||：任何一个操作数为真，求值结果就是真；只有当两个操作数均为假时，结果才是假。
+// !：如果操作数是假则结果为true；如果操作数是真则结果为false。
+// if ((x === 0 && y === 0) || !(z === 0)) {
+//   // x和y均为0，或者z不是0
+// }
+
+// null：通常用于表示某个值不存在。表明可以将null看成一种特殊对象。
+console.log(typeof null); // object
+// undefined: 表示更深层次的不存在，变量的值未初始化时就是undefined，在查询不存在的对象属性或数组元素时也会得到undefined。是一个预定义的全局变量。
+console.log(typeof undefined); // undefined 该特殊类的唯一成员
+
+//undefined表示一种系统级别、意料之外或类似错误的没有值
+//可以用null表示程序级别、正常或意料之中的没有值
+
+//Symbol符号是es6新增的一种原始类型，用作非字符串的属性名。要理解符号，需要了解JavaScript的基础类型Object是一个属性的无序集合，其中每个属性都有一个名字和一个值。属性名通常是字符串。
+let strname = 'string name'
+let symname = Symbol('propname')
+console.log(typeof strname); // string
+console.log(typeof symname); // symbol
+// Symbol永远不会返回相同的值
+let a = Symbol('sym_x') //
+console.log(a.toString()); // Symbol(sym_x)
+// 而在以相同的字符串调用时Symbol.for(）始终返回相同的值
+let b = Symbol.for('shared')
+let c = Symbol.for('shared')
+console.log(b === c); // true
+console.log(b.toString()); // "Symbol(shared)"
+console.log(Symbol.keyFor(c)); // "shared"
+
+// 全局对象：全局对象的属性是全局性定义的标识符，可以在JavaScript程序的任何地方使用．
+// 在Node程序中始终可以通过global来引用全局对象。
+// ES2020最终定义了globalThis作为在任何上下文中引用全局对象的标准方式。2020年初，所有现代浏览器和Node都实现了这个特性。
+
+// 不可修改的原始值与可修改的对象引用。
+let str = 'hello' // 小写字符串
+str.toLowerCase() // 返回"HELLO"，但不会修改str
+console.log(str); // hello, 原始字符串并未改变。
+// 对象不同于原始值，对象是可修改的，即它们的值可以改变：
+let o = { x: 2 }
+o.x = 3 // 修改：改变它的一个属性的值
+o.y = 4 // 修改：为它添加一个新属性
+console.log(o); // { x: 3, y: 4 }
+let o1 = { x: 1 }, p1 = { x: 1 }
+console.log(o1 === p1); // false 不同的对象永远也不会相等。
+
+//两个对象值当且仅当它们引用同一个底层对象时，才是相等的。
+let arr = []
+let arr2 = arr // 现在arr2引用了同一个数组
+arr[0] = 1; // 修改变量arr引用的数组
+arr2[0]
+console.log(arr === arr2); // true arr和arr2引用同一个对象，所以它们相等
+// 把对象（或数组）赋值给一个变量，其实是在赋值引用，并不会创建对象的新副本。
+let arr3 = [1, 2, 3, 4]
+let arr4 = Array.from(arr3) // 在 ES6中，可以使用 Array.fron(）复制数组
+console.log(arr4); // [1, 2, 3, 4]
+
+//以下代码定义了一个比较两个数组的函数：
+function equalArrays(a, b) {
+  if (a === b) return true;                 //同一个数组相等
+  if (a.length !== b.length) return false;  //大小不同的数组不相等
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) return false         //有任何差异，两个数组都不相等
+  }
+  return true                               //否则，两个数组相等
+}
+console.log(equalArrays([1, 2, 3], [1, 2, 3])); // true
