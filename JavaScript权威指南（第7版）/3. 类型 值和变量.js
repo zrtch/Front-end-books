@@ -184,3 +184,31 @@ function equalArrays(a, b) {
   return true                               //否则，两个数组相等
 }
 console.log(equalArrays([1, 2, 3], [1, 2, 3])); // true
+
+// 类型转换
+console.log(null == undefined); // true：这两个值被判定为相等
+console.log('0' == 0); // true：字符串在比较前会转换为数值
+console.log(1 == true); // true：布尔值在比较前会转换为数值
+console.log("0" == false); // true：两个操作数在比较前都转换为0
+// 显式转换：除null和undefined之外的所有值都有toString(方法，
+console.log(Number("3")); // 3
+console.log(String(false)); // "fasle"
+console.log(Boolean([])); // true
+// 隐式类型转换：一元操作符！会把自己的操作数转换为布尔值，然后再取反
+console.log(!!1); // Boolean(1): 注意两次取反
+
+// Number类为这些数值到字符串的转换定义了3种方法。
+// toFixed()把数值转换为字符串时可以指定小数点后面的位数.
+let n = 3.1415926
+console.log(n.toFixed(2)); // 3.14
+// toExponential()使用指数记数法将数值转换为字符串，结果是小数点前1位，小数点后为指定位数.
+console.log(n.toExponential(1)); // 3.1e+0
+// toPrecision()按照指定的有效数字个数将数值转换为字符串
+console.log(n.toPrecision(4)); // 3.142
+//数值格式化方法：parseIn()只解析整数，而parseFloat()既解析整数也解析浮点数.
+console.log(parseInt("33 binld")); // 33
+console.log(parseFloat("3.333 binld")); //3.333
+//parseInt( 接收可选的第二个参数，用于指定要解析数值的底（基）数，合法的值是2到36
+console.log(parseInt("11", 2)); // 3: (1*2 + 1)
+console.log(parseInt("ff", 16)); // 255 (15*16 + 15）
+console.log(parseInt("zz", 36)); // 1295：（35*36 + 35）
