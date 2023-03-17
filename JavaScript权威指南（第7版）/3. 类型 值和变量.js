@@ -213,6 +213,7 @@ console.log(parseInt("11", 2)); // 3: (1*2 + 1)
 console.log(parseInt("ff", 16)); // 255 (15*16 + 15）
 console.log(parseInt("zz", 36)); // 1295：（35*36 + 35）
 
+// 偏数值算法先尝试valueOf()，将toString(）作为备用．
 // toString()：是返回对象的字符串表示.
 console.log([1, 2, 3].toString()); // "1,2,3"
 console.log((function (x) { f(x); }).toString()); // "function (x) { f(x); }"
@@ -221,3 +222,10 @@ console.log(d.toString()); // Wed Jan 01 2020 00:00:00 GMT+0800 (China Standard 
 // 对象转换函数 valueOf(): 它是把对象转换为代表对象的原始值
 let d1 = new Date(2020, 0, 1)
 console.log(d1.valueOf()); // 1577808000000
+
+// 变量声明与赋值:对于绑定名字和值，我们通常会说把值赋给变量.术语“变量”意味着可以为其赋予新值，也就是说与变量关联的值在程序运行时可能会变化。如果把一个值永久地赋给一个名字，那么可以称该名字为常量而不是变量。
+// 声明变量的同时（如果可能）也为其赋予一个初始值是个好的编程习惯：
+// 如果在let语句中不为变量指定初始值，变量也会被声明，但在被赋值之前它的值是undefined。
+let i = 0, j = 0, k = 0;
+// 要声明常量而非变量，则要使用const而非let。const与let类似，区别在于const必须在声明时初始化常量：
+const H0 = 74 // 哈勃常数（km/s /Mpc）
