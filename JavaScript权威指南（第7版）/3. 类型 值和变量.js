@@ -212,3 +212,12 @@ console.log(parseFloat("3.333 binld")); //3.333
 console.log(parseInt("11", 2)); // 3: (1*2 + 1)
 console.log(parseInt("ff", 16)); // 255 (15*16 + 15）
 console.log(parseInt("zz", 36)); // 1295：（35*36 + 35）
+
+// toString()：是返回对象的字符串表示.
+console.log([1, 2, 3].toString()); // "1,2,3"
+console.log((function (x) { f(x); }).toString()); // "function (x) { f(x); }"
+let d = new Date(2020, 0, 1)
+console.log(d.toString()); // Wed Jan 01 2020 00:00:00 GMT+0800 (China Standard Time)
+// 对象转换函数 valueOf(): 它是把对象转换为代表对象的原始值
+let d1 = new Date(2020, 0, 1)
+console.log(d1.valueOf()); // 1577808000000
