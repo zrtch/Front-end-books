@@ -229,3 +229,56 @@ console.log(d1.valueOf()); // 1577808000000
 let i = 0, j = 0, k = 0;
 // 要声明常量而非变量，则要使用const而非let。const与let类似，区别在于const必须在声明时初始化常量：
 const H0 = 74 // 哈勃常数（km/s /Mpc）
+
+// 一种论调是只在值基本不会改变的情况下使用const，比如物理常数、程序版本号，或用于标识文件类型的字节序。另一种论调认为程序中很多所谓的变量实际上在程序运行时并不会改变。
+for (const datum of [1, 2, 3]) { // const声明的只是一次循环迭代期间的常量值：
+  console.log(datum); // 分别输出 1 2 3
+}
+for (let data1 of [1, 2, 3]) {
+  console.log(data1); // 分别输出 1 2 3
+}
+
+const x = 1; // 声明x为全局常量
+if (x === 1) {
+  let x = 2;
+  console.log(x) // 2 在同一个代码块中，x可以引用不同的值
+}
+console.log(x); // 1 现在又回到了全局作用域
+// let x = 3; // 错误！重新声明×会导致语法错误
+
+// 使用var的变量声明
+var data = [1, 2, 3, 4]
+for (var q = 0; q < data.length; q++) {
+  console.log(data[q]); // 循环输出 1 2 3 4
+}
+
+// 通过var声明的全局变量被实现为全局对象的属性。全局对象可以通过globalThis引用。最不同寻常的特性是作用域提升
+
+// 解构赋值：等号右手端的值是数组或对象。
+let [x1, y] = [2, 3]; // 相当于 let x=1, y=2
+[x1, y] = [x1 + 1, y + 1]; // 相当于 ×=×+1,y=+1
+[x1, y] = [y, x1] // 交换两个变量的值
+console.log([x1, y]); // [4,3]
+
+// 将(X,y)坐标转换为 [r,theta]极坐标
+function toPolar(x, y) {
+  return [Math.sqrt(x * x + y * y), Math.atan(y, x)]
+}
+let [r, theta] = toPolar(1.0, 1.0)
+console.log([r, theta]); // [ 1.4142135623730951, 0.7853981633974483 ]
+
+//左侧多余的变量会被设置为undefined，而右侧多余的值会被忽略。左侧的变量列表可以包含额外的逗号，以跳过右侧的某些值
+let [x2, y2] = [1]; // x2 == 1; y2 == undefined
+[, x2, , y2] = [1, 2, 3, 4] // x==2; y2 == 4
+// 所有未使用或剩余的值收集到一个变量中，可以在左侧最后一个变量名前面加上3个点（...）
+let [x3, ...y3] = [1, 2, 3, 4]
+console.log(y3); //[ 2, 3, 4 ]
+let [first, ...rest] = 'hello'
+console.log(rest); // [ 'e', 'l', 'l', 'o' ]
+
+const { sin, cos, tan } = Math // 相当于 const sin = Math.sin, cos = Math.cos, tan = Math.tan
+
+//解构赋值的左侧看起来像是一个数组字面量或对象字面量。在赋值之后，左侧也类似于一个有效的数组字面量或对象字面量。
+let points = [{ x: 1, y: 2 }, { x: 3, y: 4 }]
+let [{ x: x4, y: y4 }, { x: x5, y: y5 }] = points
+let points2 = [{ x: x4, y: y4 }, { x: x5, y: y5 }] // points2 == points
