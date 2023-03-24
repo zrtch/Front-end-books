@@ -147,5 +147,7 @@ console.log(unique); // [ 'Na', 'na', 'Batman!' ]
 
 //因为Map对象的迭代器并不迭代Map键或Map值，而是迭代键/值对.
 let m = new Map([[1, 'one']])
-for (let [key, valye] of m) {
+for (let [key, value] of m) {
+  console.log(key); // 1
+  console.log(value); // 'one'
 }
