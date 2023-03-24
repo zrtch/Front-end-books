@@ -135,3 +135,17 @@ for (let [k, v] of Object.entries(o)) {
   pairs += k + v
 }
 console.log(pairs); // x1y2z3
+
+//for/of与Set和Map,循环体对集合中的每个元素都会运行一次。可以使用类似下面的代码打印出一个文本字符串中的唯一单词：
+let text = "Na na na na na na na na Batman!"
+let wordSet = new Set(text.split(" "))
+let unique = [];
+for (let word of wordSet) {
+  unique.push(word)
+}
+console.log(unique); // [ 'Na', 'na', 'Batman!' ]
+
+//因为Map对象的迭代器并不迭代Map键或Map值，而是迭代键/值对.
+let m = new Map([[1, 'one']])
+for (let [key, valye] of m) {
+}
