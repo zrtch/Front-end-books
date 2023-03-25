@@ -151,3 +151,15 @@ for (let [key, value] of m) {
   console.log(key); // 1
   console.log(value); // 'one'
 }
+
+//for/in:for/in循环的in后面可以是任意对象.
+let obj = { name: 'lee', age: 112 }
+for (let p in obj) {
+  console.log(p);
+}
+for (let i in ['a', 'b', 'c']) {
+  console.log(i); // 分别打印 0 1 2
+}
+// 在操作数组时，基本上只会用到for/of而不是for/in。
+
+// 跳转语句:return语句会让解释器从函数调用跳转回调用位置，同时提供调用返回的值，
