@@ -1,4 +1,4 @@
-// 表达式语句
+// 表达式语句 
 // 赋值语句是一种主要的表达式语句
 let greeting = 'hello', counter = 1
 console.log(greeting, ++counter); // hello 2
