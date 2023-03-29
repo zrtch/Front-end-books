@@ -157,9 +157,34 @@ let obj = { name: 'lee', age: 112 }
 for (let p in obj) {
   console.log(p);
 }
+// 在操作数组时，基本上只会用到for/of而不是for/in。
 for (let i in ['a', 'b', 'c']) {
   console.log(i); // 分别打印 0 1 2
 }
-// 在操作数组时，基本上只会用到for/of而不是for/in。
 
 // 跳转语句:return语句会让解释器从函数调用跳转回调用位置，同时提供调用返回的值
+
+// 语句标签:任何语句都可以有标签，但只有给那些有语句体的语句加标签才有意义，比如循环语句和条件语句.
+// break语句在单独使用时，会导致包含它的循环或switch语句立即退出。它的语法很简单：
+for (let i = 0; i < a.length; i++) { // 下面的代码从数组元素中搜索特定的值，如果到了数组末尾，循环会退出；如果找到了目标值，它会通过break语句终止：
+  if (a[i] === target) break;
+}
+
+// continue语句与break语句类似，但continue不会退出循环，而是从头开始执行循环的下一次迭代.
+// 下面这个例子展示了使用没有标签的continue语句在发生错误时跳过当前迭代的剩余部分：
+for (let i = 0; i < data.length; i++) {
+  if (!data[i]) continue; // 不能处理未定义的数据
+  tatal += data[i]
+}
+
+// return: 函数调用是表达式，而所有表达式都有值。函数中的return语句指定了函数调用的返回值。以下是return语句的语法：
+function square(x) {
+  return x * x  // 函数有一个 return 语句
+}
+console.log(square(2)); // 4
+// return语句后面也可以不带expression，从而导致函数向调用者返回undefined。例如：
+function displayObject(o) {
+  // 如果参数为 null或 unde fined则立即返回
+  if (!o) return
+  // 这里是函数的其他代码
+}
