@@ -188,3 +188,10 @@ function displayObject(o) {
   if (!o) return
   // 这里是函数的其他代码
 }
+
+// yield: 类似于return语句,但只能用在es6新增的生成器函数中.以回送生成的值序列中的下一个值，同时又不会真正返回：
+function* range(from, to) {
+  for (let i = from; i <= to; i++) {
+    yield i
+  }
+}
