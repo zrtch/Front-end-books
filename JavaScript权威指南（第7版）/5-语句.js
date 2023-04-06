@@ -190,8 +190,14 @@ function displayObject(o) {
 }
 
 // yield: 类似于return语句,但只能用在es6新增的生成器函数中.以回送生成的值序列中的下一个值，同时又不会真正返回：
-function* range(from, to) {
-  for (let i = from; i <= to; i++) {
-    yield i
+function* range(from, to) { // 定义一个名为 range 的 generator 函数，该函数接受两个参数 from 和 to，表示生成的整数的范围
+  for (let i = from; i <= to; i++) { // 使用 for 循环遍历整数的范围，从 from 到 to
+    yield i // 使用 yield 关键字返回当前生成的整数 i，并暂停 generator 函数的执行，以便外部代码可以访问生成的值
   }
 }
+const myRange = range(1, 5)
+// 当使用 next() 方法调用迭代器对象时，generator 函数将从上一个 yield 语句的位置继续执行。
+console.log(myRange.next().value) // 输出 1 
+console.log(myRange.next().value) // 输出 2 
+console.log(myRange.next().value) // 输出 3 
+console.log(myRange.next().value) // 输出 4 
