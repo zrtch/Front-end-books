@@ -201,3 +201,73 @@ console.log(myRange.next().value) // 输出 1
 console.log(myRange.next().value) // 输出 2 
 console.log(myRange.next().value) // 输出 3 
 console.log(myRange.next().value) // 输出 4 
+
+
+// throw: 异常是一种信号，表示发生了某种意外情形或错误。抛出 throw）异常是为了表明发生了这种错误或意外情形。捕获(catch）异常则是要处理它，即采取必要或对应的措施以从异常中恢复.
+function factorial(x) {
+  // 如果收到的参数无效，则抛出异常！
+  if (x < 0) throw new Error("x must not be negative")
+  // 否则，计算一个值并正常返回
+  let f;
+  for (f = 1; x > 1; f *= x, x--); /*空语句*/
+  return f
+}
+console.log(factorial(4));
+
+// try/catch/finally: 异常处理机制
+try {
+  // 正常情况下，这里的代码会从头到尾执行,不会出现问题。但有时候也可能抛出异常：
+  // 直接通过 throw 语句抛出，或者由于调用了一个抛出异常的方法而抛出
+}
+catch (e) {
+  // 当且仅当 try 块抛出异常时，才会执行这个块中的语句。这里的语句可以使用局部变量e引用被抛出的 Error 对象。这个块可以以某种方式來处理异常，也可以什么也不做以忽略异常，还可以通过 throw 重新抛出异常
+}
+finally {
+  // 无论try块中发生什么，这个块中包合的语句都会被执行。无论 try块是否终止，这些语句都会被执行：
+}
+
+// with:with会运行一个代码块，就好像指定对象的属性是该代码块作用域中的变量一样.
+with (document.forms[0]) {
+  // 在这里直接访问表单元素。例如：
+  name.value = '';
+  address.value = '';
+  email.value = ''
+}
+
+// debugger: debugger语句一般什么也不做。不过，包含debugger的程序运行时，实现可以（但不是必需）执行某种调试操作。
+function f(o) {
+  if (o === undefined) debugger; // 仅为调试才添加的
+  // 这里是函数中的其他代码
+}
+
+// use strict: 表示（在脚本或函数中）它后面的代码是严格代码
+
+// class: 在ES6及之后的版本中，class声明会创建一个新类并为其赋予一个名字，以便将来引用。
+class Circle {
+  constructor(radius) {
+    this.r = radius
+  }
+  area() {
+    return Math.PI * this.r * this.r
+  }
+  circumference() {
+    return 2 * Math.PI * this.r
+  }
+}
+
+// import和export:import和export声明共同用于让一个JavaScript模块中定义的值可以在另一个模块中使用。
+// import 指令有几种不同的形式:
+import Circle from './geometrty/circle.js'
+import { PI, TAU } from './geometrty/constants.js'
+import { magnitude as hypotenuse } from './vectors/utils.js'
+
+// export指令就是为此而生的，它声明把当前模块中定义的一个或多个值导出，因而其他模块可以导入这些值。
+// geometrty/constants.js
+const PI = Math.PI;
+const TAU = 2 * PI;
+export { PI, TAU }
+
+export const TAU1 = 2 * PI;
+export function magnitude(x, y) { return Math.sqrt(x * x + y * y) }
+// 如果一个模块只导出一个值，通常会使用特殊的export default形式：
+export default class Circles {  /* 这里省略了类定义  */ }
