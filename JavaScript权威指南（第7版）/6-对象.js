@@ -103,3 +103,83 @@ console.log(assignobj); // { x: 1, y: 3, z: 4 }
 console.log(mergeobj); // { x: 1, y: 3, z: 4 }
 console.log(Object.assign({ x: 1 }, { x: 2, y: 3 }, { y: 4, z: 5 })); // { x: 2, y: 4, z: 5 }
 
+// 序列化对象
+let obj2 = { x: 1, y: { z: [false, null, ''] } }
+let s = JSON.stringify(obj2)
+console.log(s); // '{"x":1,"y":{"z":[false,null,""]}}'
+let p = JSON.parse(s)
+console.log(p); // { x: 1, y: { z: [ false, null, '' ] } }
+
+
+let str = { x: 1, y: 2 }.toString()
+console.log('🤩  str:', str); // 🤩  str: "[object Object]"
+
+let point1 = {
+  x: 1000,
+  y: 2000,
+  toString: function () { return `(${this.x},${this.y})`; },
+  toLocaleString: function () {
+    return `(${this.x.toLocaleString()},${this.y.toLocaleString()})`
+  }
+}
+console.log(point1.toString()); // "(1000,2000)"
+console.log(point1.toLocaleString()); // "(1,000,2,000)"
+
+let point2 = {
+  x: 3,
+  y: 4,
+  valueOf: function () { return Math.hypot(this.x, this.y) }
+}
+console.log(Number(point2)); // 5: valueof(）用于转换为数值
+console.log(point2 > 5); // false
+console.log(point2 < 6); // true
+
+let point3 = {
+  x: 1,
+  y: 2,
+  toString: function () { return `(${this.x},${this.y})`; },
+  toJSON: function () { return this.toString() }
+}
+console.log(JSON.stringify([point3])); // "["(1,2)"]"
+
+// 对象字面量扩展语法
+let x = 1, y = 2
+let q = { x, y }
+console.log(q.x + q.y); // 3
+
+const PROPERTY_NAME = 'p1'
+function computerPropertyName() { return "p" + 2 }
+let p = {
+  [PROPERTY_NAME]: 1,
+  [computerPropertyName()]: 2
+}
+console.log(p.p1 + p.p2); // 3
+
+let positon = { x: 0, y: 0 }
+let dimensions = { width: 100, height: 75 }
+let rect = { ...positon, ...dimensions }
+console.log(rect.x + rect.y + rect.width + rect.height); // 175
+
+let oo = { x: 1 }
+let pp = { x: 0, ...oo }
+console.log(pp.x); // 1：对象oo 的值覆盖了初始值
+let qq = { ...oo, x: 2 }
+console.log(qq.x); // 2：值2覆盖了前面对象oo的值
+
+let q1 = Object.create({ x: 1 })
+let p1 = { ...q1 }
+console.log(p1.x); // undefined
+
+let square = {
+  area() { return this.side * this.side },
+  side: 10
+}
+console.log(square.area()); // 100
+
+let q2 = {
+  //一个普通的数据属性
+  detaProp: value,
+  //通过一对函数定义的一个访问器属性
+  get accessorProp() { return this.detaProp },
+  set accessorProp(value) { this.detaProp = value }
+}
