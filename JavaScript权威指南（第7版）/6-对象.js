@@ -42,6 +42,64 @@ console.log(book.subtitle); // undefined：属性不存在
 let len = book.subtitle.length
 console.log(len); // TypeError： undefined 没有 length 属性
 
-let books = { author: 'dell' }
+let books = {
+  author: 'dell', "main title": "11",
+}
 delete books.author // books 对象现在没有 author 属性了
+delete books["main title"] //  现在它也没有"main title"属性了
 console.log(books);
+
+let obj1 = { x: 1 }
+console.log(delete obj1.x);// true: 删除属性x
+console.log(delete obj1.x);// true: 什么也不做（tostring 不是自有属性）
+console.log(delete obj1.toString); // true: 什么也不做（tostring 不是自有属性）
+console.log(delete 1); // true 无意义，但仍然返回 true
+
+function f() { } // 声明一个全局函数
+delete globalThis.f // false: 也不能删除这个属性
+
+globalThis.x = 1 // 创建可配置的全局属性（没有 let 或 Var)
+console.log(delete x); // true：这个属性可以删除
+
+// 测试属性
+let object = { x: 1 }
+console.log("x" in object); // true: o有自有属性"x"
+console.log("y" in object); // false: o没有属性"y"
+console.log("toString" in object); // true: o继承了 toString 属性
+
+let o2 = { x: 1 }
+console.log(o2.hasOwnProperty('x')); // true：o有自有属性×
+console.log(o2.hasOwnProperty('y')); // false：o没有属性y
+console.log(o2.hasOwnProperty('toString')); // false：toString 是继承属性
+
+// propertyIsEnumerable() 方法细化了hasOwnProperty(）测试。
+let o5 = { x: 1 }
+console.log(o5.propertyIsEnumerable("x")); // true：o有一个可枚举属性x
+console.log(o5.propertyIsEnumerable("toString")); // false： tostring 不是自有属性
+console.log(Object.prototype.propertyIsEnumerable("toString")); // false: tostring 不可枚举
+
+// 除了使用in操作符，通常简单的属性查询配合！==确保其不是未定义的就可以了：
+let o6 = { x: 1 }
+console.log(o6.x !== undefined); // true：o有属性x
+console.log(o6.y !== undefined); // false: o没有属性y
+console.log(o6.toString !== undefined); // true：o继承了tostring属性
+
+let o7 = { x: 1, y: 2, z: 3 }
+// console.log(o7.propertyIsEnumerable("toString")); //false：toString 不可枚举（也不是自有属性）
+for (let i in o7) {
+  console.log(i); // 打印x、y、Z，但没有toString
+} 22
+
+let target = { x: 1 }, source = { y: 2, z: 3 }
+for (let key of Object.keys(source)) {
+  target[key] = source[key]
+}
+console.log(target); // { x: 1, y: 2, z: 3 }
+
+let target1 = { x: 1 }, source1 = { y: 3, z: 4 }
+let assignobj = Object.assign({}, target1, source1)
+let mergeobj = { ...target1, ...source1 } // 用扩展操作符...也可以表达这种对象复制和覆盖操作
+console.log(assignobj); // { x: 1, y: 3, z: 4 }
+console.log(mergeobj); // { x: 1, y: 3, z: 4 }
+console.log(Object.assign({ x: 1 }, { x: 2, y: 3 }, { y: 4, z: 5 })); // { x: 2, y: 4, z: 5 }
+
