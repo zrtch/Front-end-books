@@ -165,6 +165,42 @@ let array3 = [1, 2, 3, 4, 5]
 console.log(array3.reduce((x, y) => x + y, 0)); // 15；所有值之和
 console.log(array3.reduce((x, y) => x * y, 1)); // 120；所有值之积
 console.log(array3.reduce((x, y) => (x > y) ? x : y)); // 5，最大值
-
+``
 let array4 = [2, 3, 4]
 console.log(array4.reduceRight((acc, val) => Math.pow(val, acc))); // 2.4178516392292583e+24
+
+console.log([1, [2, 3]].flat()); // [ 1, 2, 3 ]
+console.log([1, [2, [3]]].flat()); // [ 1, 2, [ 3 ] ]
+
+let flatarr = [1, [2, [3, [4]]]]
+console.log(flatarr.flat(1)); // [ 1, 2, [ 3, [ 4 ] ] ]
+console.log(flatarr.flat(2)); // [ 1, 2, 3, [ 4 ] ]
+console.log(flatarr.flat(3)); // [ 1, 2, 3, 4 ]
+console.log(flatarr.flat(4)); // [ 1, 2, 3, 4 ]
+
+let phrases = ["hello world", "the definitive guide"]
+let words = phrases.flatMap(phrase => phrase.split(" "))
+console.log(words); // [ 'hello', 'world', 'the', 'definitive', 'guide' ]
+
+let array5 = [1, 2, 3]
+console.log(array5.concat(4, 5)); // [ 1, 2, 3, 4, 5 ]
+console.log(array5.concat([4, 5], [6, 7])); // [ 1, 2, 3, 4, 5 ,6, 7] 数组被打平了
+console.log(array5.concat([4, [5, [6, 7]]])); // [ 1, 2, 3, 4, [ 5, [ 6, 7 ] ] ] 但不会打平嵌套的数组
+console.log(array5); // [1, 2, 3] 原始数组没有改变
+
+let stack = []
+stack.push(1, 2)
+console.log(stack); // [1,2]
+stack.pop()
+console.log(stack); // [1],返回2
+stack.push(3)
+console.log(stack); // [1,3]
+stack.pop()
+console.log(stack);  // [1], 返回3
+stack.push([4, 5])
+console.log(stack); //[1,[4,5]]
+stack.pop()
+console.log(stack);  // [1], 返回[4,5]
+stack.push(...[4, 5]) // 使用扩展操作符打平它
+console.log(stack); // [ 1, 4, 5 ]
+
