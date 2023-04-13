@@ -124,3 +124,47 @@ for (let i = 0; i < arr5.length; i++) {
   forstr2 += arr5[i]
 }
 console.log(forstr2); // Hello world
+
+let data = [1, 2, 3, 4], sum = 0;
+//计算数组元素之和
+data.forEach(value => { sum += value })
+console.log(sum); // 10
+//递增每个元素的值
+data.forEach(function (v, i, a) { a[i] = v + 1 })
+console.log(data); // [ 2, 3, 4, 5 ]
+
+let a = [1, 2, 3]
+let a6 = a.map(x => x * x) // 这个函数接收×并返回x*x
+console.log(a6); // [ 1, 4, 9 ]
+
+let filterarr = [5, 4, 3, 2, 1]
+console.log(filterarr.filter(x => x < 3)); // [ 2, 1 ],小于3的值
+console.log(filterarr.filter((x, i) => i % 2 === 0)); // [ 5, 3, 1 ], 隔一个选一个
+
+let dense = sparse.filter(() => true)
+
+let arr3 = [null, undefined, true, 1, 2, 3]
+arr3 = arr3.filter(x => x !== undefined && x !== null)
+console.log(arr3);
+
+let array = [1, 2, 3, 4, 5, 6]
+console.log(array.findIndex(x => x === 3)); // 2，值3的索引是2
+console.log(array.findIndex(x => x < 0)); // -1，数组中没有负数
+console.log(array.find(x => x % 5 === 0)); // 5, 5的倍数
+console.log(array.find(x => x % 7 === 0)); // undefined, 数组中没有7的倍数
+
+let array1 = [1, 2, 3, 4, 5]
+console.log(array1.every(x => x < 10)); // true：所有值都小 10
+console.log(array1.every(x => x & 2 === 0)); // false：并非所有值都是偶数
+
+let array2 = [1, 2, 3, 4, 5]
+console.log(array2.some(x => x % 2 === 0)); // true, a 包含偶数
+console.log(array2.some(isNaN)); // false，a没有非数值
+
+let array3 = [1, 2, 3, 4, 5]
+console.log(array3.reduce((x, y) => x + y, 0)); // 15；所有值之和
+console.log(array3.reduce((x, y) => x * y, 1)); // 120；所有值之积
+console.log(array3.reduce((x, y) => (x > y) ? x : y)); // 5，最大值
+
+let array4 = [2, 3, 4]
+console.log(array4.reduceRight((acc, val) => Math.pow(val, acc))); // 2.4178516392292583e+24
