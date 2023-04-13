@@ -204,3 +204,23 @@ console.log(stack);  // [1], 返回[4,5]
 stack.push(...[4, 5]) // 使用扩展操作符打平它
 console.log(stack); // [ 1, 4, 5 ]
 
+let q = []
+q.push(1, 2)
+console.log(q); // [1,2]
+q.shift()
+console.log(q); // [2], 返回1
+q.push(3)
+console.log(q); // [2,3]
+q.shift()
+console.log(q); // [3], 返回2
+q.shift()
+console.log(q); // [], 返回3
+
+let a = []
+a.unshift(1)
+console.log(a); // [1]
+a.unshift(2)
+console.log(a); // [2,1]
+a = []
+a.unshift(1, 2)
+console.log(a); // [1,2]
