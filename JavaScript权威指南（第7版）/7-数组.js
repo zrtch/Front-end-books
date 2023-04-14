@@ -224,3 +224,34 @@ console.log(a); // [2,1]
 a = []
 a.unshift(1, 2)
 console.log(a); // [1,2]
+
+let slicearr = [1, 2, 3, 4, 5]
+console.log(slicearr.slice(0, 3)); // [1, 2, 3]
+console.log(slicearr.slice(3)); // [4,5]
+console.log(slicearr.slice(1, -1)); // [ 2, 3, 4 ]
+console.log(slicearr.slice(-3, -2));// [ 3 ]
+
+let splicearr = [1, 2, 3, 4, 5, 6, 7, 8]
+console.log(splicearr.splice(4)); // [ 5, 6, 7, 8 ], a现在是[1,2,3,4]
+console.log(splicearr.splice(1, 2)); // [2,3], a现在是[1,4]
+console.log(splicearr.splice(1, 1)); //  [4], a现在是[1]
+
+let arr7 = [1, 2, 3, 4, 5,]
+console.log(arr7.splice(0, 3, 'a', 'b', 'c')); // [ 1, 2, 3 ]
+console.log(arr7); // [ 'a', 'b', 'c', 4, 5 ]
+console.log(arr7.splice(2, 2, [1, 2], 9)); // [ 'c', 4 ]
+console.log(arr7);  // ['a','b',[1,2],9,5]
+
+let arr8 = new Array(5)
+arr8.fill(0) // 用0填充数组
+console.log(arr8); // [ 0, 0, 0, 0, 0 ] 
+arr8.fill(9, 1) // 从索引1开始填充9
+console.log(arr8); // [ 0, 9, 9, 9, 9 ] 
+arr8.fill(8, 2, -1) // 在索引2、3填充8
+console.log(arr8); // [ 0, 9, 8, 8, 9 ]
+
+let arr9 = [1, 2, 3, 4, 5]
+console.log(arr9.copyWithin(1)); // [ 1, 1, 2, 3, 4 ] 把数组元素复制到索引1及之后
+console.log(arr9.copyWithin(2, 3, 5)); // [ 1, 1, 3, 4, 4 ] 把最后两个元素复制到索引2
+console.log(arr9.copyWithin(0, -2)); //[ 1, 4, 4, 4, 4 ] 负偏移量也可以
+
