@@ -55,3 +55,16 @@ console.log(filtered); // [1,2,3]
 //求数值的平方
 let squares = [1, 2, 3, 4].map(x => x * x)
 console.log(squares); // [ 1, 4, 9, 16 ]
+
+function hypotenuse(a, b) {
+  function square(x) { return x * x }
+  return Math.sqrt(square(a) + square(b))
+}
+console.log(hypotenuse(1, 2)); // 2.23606797749979
+
+printprops({ x: 1 })
+let total = distance(0, 0, 2, 1) + distance(2, 1, 3, 5);
+
+(f !== null && f !== undefined) ? f(x) : undefined
+
+const strict = (function () { return !this; }())
