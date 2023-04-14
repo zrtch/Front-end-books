@@ -255,3 +255,74 @@ console.log(arr9.copyWithin(1)); // [ 1, 1, 2, 3, 4 ] 把数组元素复制到�
 console.log(arr9.copyWithin(2, 3, 5)); // [ 1, 1, 3, 4, 4 ] 把最后两个元素复制到索引2
 console.log(arr9.copyWithin(0, -2)); //[ 1, 4, 4, 4, 4 ] 负偏移量也可以
 
+let arr10 = [0, 1, 2, 1, 0]
+console.log(arr10.indexOf(1)); //1 arr10[1]是1
+console.log(arr10.lastIndexOf(1)); //3 arr10[3]是1
+console.log(arr10.indexOf(3)); // -1：没有元素的值是3
+
+let includesarr = [1, true, NaN, 3]
+console.log(includesarr.includes(true)); // true
+console.log(includesarr.includes(2)); // false
+console.log(includesarr.includes(NaN)); // true
+console.log(includesarr.indexOf(NaN)); // -1, indexof 无法找到 NaN
+
+let sortarr = ['banana', 'cherry', 'apple']
+console.log(sortarr.sort()); // [ 'apple', 'banana', 'cherry' ]
+
+let arrq = [33, 4, 1111, 222]
+console.log(arrq.sort()); // [ 1111, 222, 33, 4 ]
+arrq.sort(function (a, b) { //传入一个比较函数
+  return a - b            // 取决于顺序，返回<0、0或>0
+})
+console.log(arrq); // [ 4, 33, 222, 1111 ]
+console.log(arrq.sort((a, b) => b - a)); // [ 1111, 222, 33, 4 ] 相反的数值顺序
+
+let lowerarr = ['ant', 'Bug', 'cat', 'Dog']
+console.log(lowerarr.sort()); // [ 'Bug', 'Dog', 'ant', 'cat' ] 区分大小写的排序
+lowerarr.sort(function (s, t) {
+  let a = s.toLowerCase()
+  let b = t.toLowerCase()
+  if (a < b) return -1
+  if (a > b) return 1
+  return 0
+})
+console.log(lowerarr); // [ 'ant', 'Bug', 'cat', 'Dog' ] 不区分大小写的排序
+
+let reversearr = [1, 2, 3]
+console.log(reversearr.reverse()); // [ 3, 2, 1 ]
+
+let joinarr = [1, 2, 3]
+console.log(joinarr.join()); // "1,2,3"
+console.log(joinarr.join(" ")); // "1 2 3"
+console.log(joinarr.join("")); // "123"
+let joinarr1 = new Array(10)
+console.log(joinarr1.join("-")); // "---------" 包含9个连字符的字符串
+
+console.log([1, 2, 3].toString()); // "1,2,3"
+console.log([1, [2, "c"]].toString()); // "1,2,c"
+console.log(["a", 'b', 'c'].toLocaleString()); //"a,b,c"
+
+console.log(Array.isArray([])); // true
+console.log(Array.isArray({})); // false
+
+let obj = {} //创建一个常规的空对象
+// 添加属性让它变成“类数组”对象
+let j = 0;
+while (j < 4) {
+  obj[j] = j * j;
+  j++
+}
+obj.length = j
+
+// 像遍历真正的数组一样遍历这个对象
+let total = 0;
+for (let k = 0; k < obj.length; k++) {
+  total += obj[k]
+}
+console.log(obj); // { '0': 0, '1': 1, '2': 4, '3': 9, length: 4 }
+
+let s = 'test'
+console.log(s.charAt(0)); // t
+console.log(s[1]); // e
+
+console.log(Array.prototype.join.call("javascript", " ")); // "j a v a s c r i p t"
