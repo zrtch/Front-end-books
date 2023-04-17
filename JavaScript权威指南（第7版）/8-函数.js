@@ -153,3 +153,121 @@ function vectorMultiply2({ x, y, z = 0, ...props }, scalar) {
   return { x: x * scalar, y: y * scalar, z: z * scalar, ...props }
 }
 console.log(vectorMultiply2({ x: 1, y: 2, w: -1 }, 2)); // { x: 2, y: 4, z: 0, w: -1 }
+
+function square1(x) {
+  return x * x
+}
+let s = square1
+console.log(square1(2)); // 4
+console.log(s(2));
+
+let o1 = { square: function (x) { return x * x } }; //对象字面量
+let y = o1.square(4)
+console.log(y); // 16
+
+let num = [x => x * x, 20]
+console.log(num[0](num[1])); // 400
+
+// 这里定义了几个简单的函数
+function add(x, y) { return x + y }
+function subtract(x, y) {
+  return x - y
+}
+function multiply(x, y) {
+  return x * y
+}
+function divide(x, y) {
+  return x / y
+}
+
+// 这个函数接收前面定义的任意一个函数 
+// 作为参数，然后再用两个操作数调用它
+function operate(operator, operand1, operand2) {
+  return operator(operand1, operand2)
+}
+
+// 可以像这样调用这个函数，计算(2+3）+(4*5）的值
+let i = operate(add, operate(add, 2, 3), operate(multiply, 4, 5))
+console.log(i);
+
+const operators2 = {
+  add: (x, y) => x + y,
+  subtract: (x, y) => x - y,
+  multiply: (x, y) => x * y,
+  divide: (x, y) => x / y,
+  pow: Math.pow   // 预定义的函数也没问题
+}
+
+//这个函数只接收操作的名字，然后在对象中查询
+//这个名字，然后再使用传入的操作数调用它
+function operate2(operation, operand1, operand2) {
+  if (typeof operators2[operation] === 'function') {
+    return operators2[operation](operand1, operand2)
+  }
+  else throw "unknown operator"
+}
+console.log(operate2("add", "Hello", operate2("add", "-", "world"))); // Hello-world
+console.log(operate2("pow", 10, 2)); // 100
+
+// 初始化函数对象的计数器(counter）属性
+uniqueInteger.counter = 0;
+function uniqueInteger() {
+  return uniqueInteger.counter++
+}
+console.log(uniqueInteger());
+console.log(uniqueInteger());
+
+function chunkNamespace() {
+  //要复用的代码放在这里
+  //在这里定义的任何变量都是函数的局部变量
+  //不会污染全局命名空间
+  console.log('复用代码');
+}
+chunkNamespace() //别忘了调用这个函数！
+
+  (function () {
+    console.log('定义并调用匿名函数');
+  }())
+
+let scope = "global scoped" //全局变量
+function checkscope() {
+  let scope = 'local scope'; // 局部变量
+  function f() { return scope }  // 返回当前作用域中的值
+  return f
+}
+let result = checkscope()()
+console.log(result); // local scope
+
+let uniqueInteger1 = (function () {
+  let counter = 0;
+  return function () { return counter++ }
+}())
+console.log(uniqueInteger1()); // 0
+console.log(uniqueInteger1()); // 1
+
+// 使用了闭包保存私有状态而非依赖常规对象属性：
+function counter(n) { // 函数参数n是私有变量
+  return {
+    // 属性获取方法，返回递增后的私有计数器值
+    get count() { return n++ },
+    // 属性设置方法，不允许n的值减少
+    set count(m) {
+      if (m > n) n = m;
+      else throw Error('计数只能设置为更大的数')
+    }
+  }
+}
+let c = counter(1000)
+console.log(c.count); // 1000
+console.log(c.count); // 1001
+c.count = 2000;
+console.log(c.count); // 2000
+c.count = 2000; // 错误：计数只能设置为更大的数
+
+// 这个函数返回一个始终返回v的函数
+function constfunc(v) { return () => v }
+// 创建一个常量函数的数组
+let funcs = []
+for (var j = 0; j < 10; j++) funcs[j] = constfunc(j)
+// 索引5对应的函数返回数值5
+console.log(funcs[5]());
