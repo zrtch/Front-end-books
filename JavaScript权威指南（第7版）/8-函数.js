@@ -68,3 +68,22 @@ let total = distance(0, 0, 2, 1) + distance(2, 1, 3, 5);
 (f !== null && f !== undefined) ? f(x) : undefined
 
 const strict = (function () { return !this; }())
+
+let calulator = { // 对象字面量
+  operand1: 1,
+  operand2: 1,
+  add() { // 对这个函数使用了方法简写语法
+    // 注意这里使用 this 关键字引用了包含对象
+    this.result = this.operand1 + this.operand2
+  }
+}
+calulator.add() // 方法调用，计算 1+1
+console.log(calulator.result); // 2
+
+o["m"](x, y) // 对o.m(x,y)的另一种写法
+a[0].z // 也是一种方法调用（假设 a[0] 是函数）
+
+new square().x(100).y(100).size(50).outline("red").fill("blue").draw()
+
+o = new Object()
+O = new Object
