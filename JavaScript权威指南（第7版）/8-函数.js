@@ -87,3 +87,69 @@ new square().x(100).y(100).size(50).outline("red").fill("blue").draw()
 
 o = new Object()
 O = new Object
+
+//把对象 o 的可枚举属性名放到数组a中，返回a
+function getPropertyNames(o, a) {
+  if (a === undefined) a = []; // 如果是 undefined，创建一个新数组
+  for (let property in o) a.push(property);
+  return a
+}
+
+// 调用 getPropertyNames(）时可以传一个参数，也可以传两个参数
+let o = { x: 1 }, p = { y: 2, z: 3 }
+let a = getPropertyNames(o)
+console.log(a); // a == [ 'x' ]; o的属性保存在新数组中
+console.log(getPropertyNames(p, a)); //a == [ 'x', 'y', 'z' ]; 把p的属性也放到a中
+
+//这个函数返回一个表示矩形尺寸的对象。 如果只提供 width，则 height 就是它的两倍。
+const rectangle = (width, height = width * 2) => ({ width, height })
+console.log(rectangle(2)); // { width: 2, height: 4 }
+
+function max(first = -Infinity, ...rest) {
+  let maxValue = first; // 假设第一个参数是最大的
+  // 遍历其他参数，寻找更大的数值
+  for (let n of rest) {
+    if (n > maxValue) {
+      maxValue = n
+    }
+  }
+  // 返回最大的数值
+  return maxValue
+}
+console.log(max(1, 0, 1000, 14, 200, 45, 6)); // 1000
+
+function Max(x) {
+  let maxValue = -Infinity;
+  // 遍历 arguments，查找并记住最大的数值
+  for (let i = 0; i < arguments.length; i++) {
+    if (arguments[i] > maxValue) maxValue = arguments[i]
+  }
+  // 返回最大的数值
+  return maxValue
+}
+console.log(Max(2000, 14, 200, 45, 6)); // 2000
+
+let numbers = [1, 2, 33, 3000, 23]
+console.log(Math.max(...numbers)); // 3000
+
+
+function vectorAdd(v1, v2) {
+  return [v1[0] + v2[0], v1[1] + v2[1]]
+}
+console.log(vectorAdd([1, 2], [3, 4])); // [ 4, 6 ]
+
+function vectorAdd1([x1, y1], [x2, y2]) {
+  return [x1 + x2, y1 + y2]
+}
+console.log(vectorAdd1([1, 2], [3, 4])); // [ 4, 6 ]
+
+
+function vectorMultiply({ x, y, z = 0 }, scalar) {
+  return { x: x * scalar, y: y * scalar, z: z * scalar }
+}
+console.log(vectorMultiply({ x: 1, y: 2 }, 2)); // { x: 2, y: 4, z: 0 }
+
+function vectorMultiply2({ x, y, z = 0, ...props }, scalar) {
+  return { x: x * scalar, y: y * scalar, z: z * scalar, ...props }
+}
+console.log(vectorMultiply2({ x: 1, y: 2, w: -1 }, 2)); // { x: 2, y: 4, z: 0, w: -1 }
