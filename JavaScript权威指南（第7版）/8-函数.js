@@ -206,7 +206,7 @@ function operate2(operation, operand1, operand2) {
   }
   else throw "unknown operator"
 }
-console.log(operate2("add", "Hello", operate2("add", "-", "world"))); // Hello-world
+console.log(operate2("add", "Hello", operate2("a  d", "-", "world"))); // Hello-world
 console.log(operate2("pow", 10, 2)); // 100
 
 // 初始化函数对象的计数器(counter）属性
@@ -271,3 +271,96 @@ let funcs = []
 for (var j = 0; j < 10; j++) funcs[j] = constfunc(j)
 // 索引5对应的函数返回数值5
 console.log(funcs[5]());
+
+function f(y) { return this.x + y } // 这个函数需要绑定
+let bindobj = { x: 1 } // 要绑定的对象
+let gobj = f.bind(bindobj) // 调用g(x）会在o上调用f（）
+console.log(gobj(2)); // 3
+let pobj = { x: 10, gobj } // 作为这个对象的方法调用g(）
+console.log(pobj.gobj(2)); // 3 gobj仍然绑定到bindobj，而非pobj
+
+let sunmber = (x, y) => x + y // 返回2个参数之和
+let succ = sunmber.bind(null, 1) // 把第一个参数绑定为1
+console.log(succ(2)); // 3：x绑定到1，2会传给参数y
+
+function f(y, z) { return this.x + y + z }
+let g1 = f.bind({ x: 1 }, 2) // 绑定 this 和 y
+console.log(g1(3)); // 6: this.x绑定到1，y绑定到2，Z是3
+
+function foo() { }
+console.log(foo.toString()); "function foo() { }"
+
+function isFunction(x) {
+  return typeof x === 'function' && x.toString().startsWith('function')
+}
+console.log(isFunction(foo)); // true
+console.log(isFunction([1, 2]));
+
+function foo() { }
+var bar = foo
+console.log(foo.toString() === bar.toString()); // true
+console.log(foo.name); // foo
+
+console.log((function () { }).toString()); // "function () { }"
+
+function greet() {
+  console.log(this.name + ' says hello');
+}
+let obj1 = { name: 'john' }
+greet.call(obj1) // john says hello
+let obj2 = { name: "lebron" }
+greet.call(obj2) // lebron says hello
+
+function product(name, price) {
+  this.name = name
+  this.price = price
+}
+function food(name, price) {
+  product.call(this, name, price)
+  this.category = 'food'
+}
+let bacon = new food("bacon", 5)
+console.log(bacon);
+
+function add(x, y) {
+  console.log(x + y);
+}
+add.apply(null, [1, 2])
+add.call(null, 1, 2)
+
+function produce1(name, price) {
+  this.name = name
+  this.price = price
+}
+function food1(name, price) {
+  produce1.apply(this, [name, price])
+  this.category = 'food'
+}
+var apple = new food1('aplle', '5')
+console.log(apple); // food1 { name: 'aplle', price: '5', category: 'food' }
+
+function greet() {
+  console.log(this.name + ' say bye');
+}
+let obj3 = { name: 'john' }
+let obj4 = { name: 'dell' }
+let greetjohn = greet.bind(obj3)
+greetjohn() // john say bye
+let greetdell = greet.bind(obj4)
+greetdell() // dell say bye
+
+function add(x, y) {
+  return x + y
+}
+let add2 = add.bind(null, 5)
+console.log(add2(10)); // 15
+console.log(add2(15)); // 20
+
+const f = new Function("x", "y", "return x*y;")
+
+let scopes = 'global'
+function constructFunction() {
+  let scopes = 'local';
+  return new Function("return scopes")
+}
+console.log(constructFunction()()); // "global'"
