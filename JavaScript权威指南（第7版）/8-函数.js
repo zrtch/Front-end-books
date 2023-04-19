@@ -364,3 +364,9 @@ function constructFunction() {
   return new Function("return scopes")
 }
 console.log(constructFunction()()); // "global'"
+
+console.log(0.1 + 0.2); // 0.30000000000000004
+
+console.log(0.1 + 0.2 === 0.3); // false
+
+console.log(Math.abs(0.1 + 0.2 - 0.3) < 0.0001); // true
